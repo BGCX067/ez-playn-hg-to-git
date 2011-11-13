@@ -91,6 +91,8 @@ public abstract class Control implements InteractiveDrawable
         return this.height;
     }
 
+    public abstract void onPointerLeave(int x, int y);
+
     /**
      * Sets the width of the object.
      * @param width The new width
