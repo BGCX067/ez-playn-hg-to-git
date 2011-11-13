@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="build-ezplayn" default="compile"
+<project name="ez-playn" default="compile"
     xmlns:artifact="urn:maven-artifact-ant">
 
   <property name="version.num"  value="1.0"/>
