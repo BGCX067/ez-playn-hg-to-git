@@ -150,20 +150,48 @@ public class Message extends Control implements ControlHolder
 
     /* Static methods */
 
+    /**
+     * Create a message object with only text.
+     * Shows white text on a black translucent rectangle
+     * @param width The width of the message body
+     * @param height The height of the message body
+     * @param text The text to display
+     * @return New instance of a message.
+     */
     public static Message createTextMessage(int width, int height, String text)
     {
-        return staticMessage.innerCreateTextMessage(width, height, text);
+        return staticMessage.innerCreateTextMessage(width, height, text, Color.argb(150, 0, 0, 0), Color.argb(255, 255, 255, 255));
     }
 
-    private Message innerCreateTextMessage(int width, int height, String text)
+    /**
+     * Create a message object with only text.
+     * @param width The width of the message body
+     * @param height The height of the message body
+     * @param text The text to display
+     * @param backColor The back color using {@link playn.core.Color}
+     * @param textColor The text color using {@link playn.core.Color}
+     * @return New instance of a message.
+     */
+    public static Message createTextMessage(int width, int height, String text, int backColor, int textColor)
     {
-        return new Message.TextMessage(width, height, text);
+        return staticMessage.innerCreateTextMessage(width, height, text, backColor, textColor);
     }
 
+
+    private Message innerCreateTextMessage(int width, int height, String text, int backColor, int textColor)
+    {
+        return new Message.TextMessage(width, height, text, backColor, textColor);
+    }
+
+    /**
+     * A private wrapper class to show text only.
+     * @author Prageeth Silva
+     * @see Message
+     */
     private class TextMessage extends Message
     {
 
-        public TextMessage(int width, int height, String text)
+        public TextMessage(int width, int height, String text, int backColor, int textColor)
         {
 
             super(width, height);
@@ -172,9 +200,9 @@ public class Message extends Control implements ControlHolder
             Canvas canvas = canvasLayer.canvas();
             this.rootLayer.add(canvasLayer);
 
-            canvas.setFillColor(Color.argb(150, 0, 0, 0));
+            canvas.setFillColor(backColor);
             canvas.fillRect(0, 0, this.width, this.height);
-            canvas.setFillColor(Color.argb(255, 255, 255, 255));
+            canvas.setFillColor(textColor);
             canvas.drawText(text, 20, this.height/2);
 
             canvasLayer.setTranslation(this.x, this.y);

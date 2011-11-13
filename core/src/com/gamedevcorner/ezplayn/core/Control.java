@@ -20,6 +20,12 @@ import static playn.core.PlayN.*;
 
 import playn.core.*;
 
+/**
+ * A control is an drawable that responds to user interaction.
+ * @author Prageeth Silva
+ * @see InteractiveDrawable
+ * @see Drawable
+ */
 public abstract class Control implements InteractiveDrawable
 {
 
@@ -36,7 +42,14 @@ public abstract class Control implements InteractiveDrawable
 
     protected boolean autoCentring = true;
 
-    public Control(int width, int height, Image backgroundImage)
+    /**
+     * A constructor that should be called by the extending child.
+     * @param width The width of the control
+     * @param height The height of the control
+     * @param backgroundImage An image to be used as the background,
+     *        use <code>null</code> to leave the background empty.
+     */
+    protected Control(int width, int height, Image backgroundImage)
     {
         this.setWidth(width);
         this.setHeight(height);
@@ -49,7 +62,13 @@ public abstract class Control implements InteractiveDrawable
         }
     }
 
-    public Control(int width, int height)
+    /**
+     * A constructor that should be called by the extending child.
+     * Assumes the background is empty, but can be set later.
+     * @param width The width of the control
+     * @param height The height of the control
+     */
+    protected Control(int width, int height)
     {
         this(width, height, null);
     }
@@ -72,18 +91,26 @@ public abstract class Control implements InteractiveDrawable
         return this.height;
     }
 
+    /**
+     * Sets the width of the object.
+     * @param width The new width
+     */
     public void setWidth(int width)
     {
 
         this.width = width;
 
-        if (autoCentring)
+        if (this.autoCentring)
         {
             this.x = (ExtendedGame.screenWidth-width)/2;
         }
 
     }
 
+    /**
+     * Sets the height of the object.
+     * @param height The new height
+     */
     public void setHeight(int height)
     {
 
@@ -96,11 +123,20 @@ public abstract class Control implements InteractiveDrawable
 
     }
 
+    /**
+     * <b>Required at the end of initialisation</b> to update the internal layout settings.
+     */
     public void commitLayout()
     {
         this.rootLayer.setTranslation(this.x, this.y);
     }
 
+    /**
+     * <b>Required at the end of initialisation</b> to update the internal layout settings.
+     * Also overwrites and updates the x and y coordinates from the relative {@link ControlHolder}'s position.
+     * @param x The x-coordinate in pixels from the left of the parent {@link ControlHolder}
+     * @param y The y-coordinate in pixels from the top of the parent {@link ControlHolder}
+     */
     public void commitLayout(int x, int y)
     {
         this.x = x;
@@ -108,11 +144,18 @@ public abstract class Control implements InteractiveDrawable
         this.commitLayout();
     }
 
+    /**
+     * Checks if the control will auto centre on screen.
+     * @return The auto-centring status
+     */
     public boolean isAutoCentring()
     {
         return this.autoCentring;
     }
 
+    /**
+     * Update the auto-centring status of the control.
+     */
     public void setAutoCentring(boolean autoCentring)
     {
         this.autoCentring = autoCentring;
@@ -123,11 +166,29 @@ public abstract class Control implements InteractiveDrawable
         }
     }
 
+    /**
+     * Checks if the given coordinates are within the range of the control.
+     * This method assumes the coordinates are already normalised by the parent
+     * {@link ControlHolder}. If absolute coordinates are to be check, use
+     * {@link Control#isInAbsRange(int, int)}
+     * @param x The x-coordinate from the left of the parent {@link ControlHolder}
+     * @param y The y-coordinate from the top of the parent {@link ControlHolder}
+     * @return Whether the coordinates are in range.
+     */
     protected boolean isInNormRange(int x, int y)
     {
         return (x >= 0 && x <= this.width) && (y >= 0 && y <= this.height);
     }
 
+    /**
+     * Checks if the given coordinates are within the range of the control.
+     * This method assumes the coordinates are absolute screen coordinates.
+     * If normalised coordinates are to be check, use
+     * {@link Control#isInNormRange(int, int)}
+     * @param x The x-coordinate from the left of the screen
+     * @param y The y-coordinate from the top of the screen
+     * @return Whether the coordinates are in range.
+     */
     protected boolean isInAbsRange(int x, int y)
     {
         x -= this.x;

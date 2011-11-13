@@ -17,17 +17,28 @@ package com.gamedevcorner.ezplayn.core;
 
 import playn.core.ResourceCallback;
 
+/**
+ * A generic callback wrapper interface for any actions.
+ * This can be useful if/when threads are allowed.
+ * @author Prageeth Silva
+ * @param <T> A generic type
+ */
 public interface ActionCallback<T> extends ResourceCallback<T>
 {
 
     /**
      * Called when the action is successfully done.
+     * @param result The result returned by the callback,
+     *        use {@link java.lang.Void} if no return value is required.
      */
+    @Override
     void done(T result);
 
     /**
      * Called when the action fails.
+     * @param error The exception thrown that caused the action to fail.
      */
+    @Override
     void error(Throwable error);
 
 }

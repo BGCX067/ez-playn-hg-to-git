@@ -19,6 +19,10 @@ package com.gamedevcorner.ezplayn.core;
 import static playn.core.PlayN.*;
 import playn.core.*;
 
+/**
+ *
+ * @author Prageeth Silva *
+ */
 public abstract class Button extends Control
 {
 

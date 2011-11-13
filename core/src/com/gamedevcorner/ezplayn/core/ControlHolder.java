@@ -17,13 +17,34 @@ package com.gamedevcorner.ezplayn.core;
 
 import java.util.*;
 
+/**
+ * An interface that allows to hold child controls.
+ * @author Prageeth Silva
+ * @see Control
+ */
 public interface ControlHolder
 {
 
+    /**
+     * Gets a collection of child controls associated with this object.
+     * @return The collection of child controls.
+     */
     public Collection<Control> getChildControls();
 
+    /**
+     * Add a child control to the associated control collection.
+     * @param control The child control to add.
+     * @return <code>true</code> represents succession and <code>false</code>
+     *         represents failure.
+     */
     public boolean addChildControl(Control control);
 
+    /**
+     * Removes an already added child control from the associated control collection.
+     * @param control The child control to be removed.
+     * @return <code>true</code> represents succession and <code>false</code>
+     *         represents failure.
+     */
     public boolean removeChildControl(Control control);
 
 }
