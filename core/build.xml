@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<project name="ezplayn" default="compile">
+  <property name="java.classname" value="com.gamedevcorner.ezplayn.samples.java.SampleGameJava"/>
+  <property name="html.classname" value="com.gamedevcorner.ezplayn.samples.SampleGame"/>
+  <property name="html.index" value="Sample.html"/>
+  <import file="build-ezplayn-core.xml"/>
+</project>
