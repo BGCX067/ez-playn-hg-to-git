@@ -1,12 +1,18 @@
 <?xml version="1.0"?>
-<project name="build-ezplayn" default="compile" xmlns:artifact="urn:maven-artifact-ant">
+<project name="build-ezplayn" default="compile"
+    xmlns:artifact="urn:maven-artifact-ant">
 
   <property name="version.num"     value="1.0"/>
   <property name="src.dir"     value="src"/>
   <property name="target.dir"  value="target"/>
+  <property name="lib.dir"  value="lib"/>
   <property name="classes.dir" value="${target.dir}/classes"/>
   <property name="jar.dir"     value="${target.dir}/jar"/>
   <property name="jar.name"    value="ez-playn-core-${version.num}"/>
+
+  <path id="custom.libs">
+    <fileset dir="${lib.dir}" includes="**/*.jar"/>
+  </path>
 
   <target name="clean">
     <delete dir="${target.dir}"/>
@@ -14,7 +20,11 @@
 
   <target name="compile">
     <mkdir dir="${classes.dir}"/>
-    <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+    <javac srcdir="${src.dir}" destdir="${classes.dir}"
+    	includeAntRuntime="false" debug="on" deprecation="on" source="1.6"
+        target="1.6">
+      <classpath refid="custom.libs"/>
+    </javac>
   </target>
 
   <target name="jar" depends="compile">
