@@ -72,11 +72,24 @@ public class Message extends Control implements ControlHolder
     @Override
     public void onPointerMove(int x, int y)
     {
+        int nx, ny;
         for (Control c : this.activeControls)
         {
-            c.onPointerMove(x - c.getX(), y - c.getY());
+            nx = x - c.getX();
+            ny = y - c.getY();
+            if (c.isInNormRange(nx, ny))
+            {
+                c.onPointerMove(nx, ny);
+            }
+            else
+            {
+                c.onPointerLeave(x, y);
+            }
         }
     }
+
+    @Override
+    public void onPointerLeave(int x, int y) { /* NOOP */ }
 
     @Override
     public void onPointerScroll(int velocity)

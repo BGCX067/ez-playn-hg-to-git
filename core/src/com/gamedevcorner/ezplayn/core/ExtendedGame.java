@@ -64,6 +64,12 @@ public abstract class ExtendedGame implements Game
                 self.onPointerUp((int)event.x(), (int)event.y());
             }
 
+            @Override
+            public void onPointerDrag(Pointer.Event event)
+            {
+                self.onPointerMove((int)event.x(), (int)event.y());
+            }
+
         });
 
         // keyboard

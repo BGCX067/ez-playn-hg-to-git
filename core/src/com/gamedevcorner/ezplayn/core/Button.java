@@ -26,6 +26,8 @@ import playn.core.*;
 public abstract class Button extends Control
 {
 
+    protected static float ORIGINAL_SCALE = 1.0f;
+
     protected ImageLayer disabledLayer = null;
 
     private boolean allowingDisable = false;
@@ -36,6 +38,8 @@ public abstract class Button extends Control
     private int expandOffsetX = 0;
     private int expandOffsetY = 0;
     private float expandScale = 1.1f;
+    private float currentScale = ORIGINAL_SCALE;
+
 
     public Button(int width, int height, Image activeImage, Image disabledImaged)
     {
@@ -71,9 +75,10 @@ public abstract class Button extends Control
     @Override
     public void onPointerUp(int x, int y)
     {
-        if (this.expanding && this.enabled)
+        if (this.expanding && this.enabled && (this.currentScale != ORIGINAL_SCALE))
         {
-            this.getRootLayer().setScale(1f, 1f);
+            this.currentScale = ORIGINAL_SCALE;
+            this.getRootLayer().setScale(ORIGINAL_SCALE, ORIGINAL_SCALE);
             this.getRootLayer().setTranslation(this.getX(), this.getY());
         }
     }
@@ -81,15 +86,47 @@ public abstract class Button extends Control
     @Override
     public void onPointerDown(int x, int y)
     {
-        if (this.expanding && this.enabled)
+        /*
+        if (this.expanding && this.enabled && (this.currentScale != ORIGINAL_SCALE))
         {
+            this.currentScale = ORIGINAL_SCALE;
+            this.getRootLayer().setScale(ORIGINAL_SCALE, ORIGINAL_SCALE);
+            this.getRootLayer().setTranslation(this.getX(), this.getY());
+        }
+        */
+        if (this.expanding && this.enabled && (this.currentScale != this.expandScale))
+        {
+            this.currentScale = this.expandScale;
             this.getRootLayer().setScale(this.expandScale, this.expandScale);
             this.getRootLayer().setTranslation(this.getX() - this.expandOffsetX, this.getY() - this.expandOffsetY);
         }
     }
 
     @Override
-    public void onPointerMove(int x, int y) { /* NOOP */ }
+    public void onPointerMove(int x, int y)
+    {
+        /*
+        if (this.expanding && this.enabled && (this.currentScale != this.expandScale))
+        {
+            this.currentScale = this.expandScale;
+            this.getRootLayer().setScale(this.expandScale, this.expandScale);
+            this.getRootLayer().setTranslation(this.getX() - this.expandOffsetX, this.getY() - this.expandOffsetY);
+        }
+        */
+    }
+
+    @Override
+    public void onPointerLeave(int x, int y)
+    {
+        /*
+        if (this.expanding && this.enabled && (this.currentScale != ORIGINAL_SCALE))
+        {
+            this.currentScale = ORIGINAL_SCALE;
+            this.getRootLayer().setScale(ORIGINAL_SCALE, ORIGINAL_SCALE);
+            this.getRootLayer().setTranslation(this.getX(), this.getY());
+        }
+        */
+    }
 
     @Override
     public void onPointerScroll(int velocity) { /* NOOP */ }
