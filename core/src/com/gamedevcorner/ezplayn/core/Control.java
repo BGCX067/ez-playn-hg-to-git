@@ -29,18 +29,18 @@ import playn.core.*;
 public abstract class Control implements InteractiveDrawable
 {
 
-    protected int width = 0;
-    protected int height = 0;
+    private int width = 0;
+    private int height = 0;
 
-    protected int x = 0;
-    protected int y = 0;
+    private int x = 0;
+    private int y = 0;
 
     protected GroupLayer rootLayer = null;
 
     protected ImageLayer backgroundLayer = null;
     protected Image backgroundImage = null;
 
-    protected boolean autoCentring = true;
+    private boolean autoCentring = true;
 
     /**
      * A constructor that should be called by the extending child.
@@ -195,5 +195,25 @@ public abstract class Control implements InteractiveDrawable
         y -= this.y;
         return (x >= 0 && x <= this.width) && (y >= 0 && y <= this.height);
     }
+
+    /**
+     * Gets the x-coordinate from the left of the parent {@link ControlHolder}
+     * @return The x coordinates in pixels
+     */
+    public int getX()
+    {
+        return this.x;
+    }
+
+    /**
+     * Gets the y-coordinate from the top of the parent {@link ControlHolder}
+     * @return The y coordinates in pixels
+     */
+    public int getY()
+    {
+        return this.y;
+    }
+
+
 
 }

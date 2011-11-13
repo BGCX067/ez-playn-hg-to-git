@@ -116,7 +116,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             {
                 for (Message m : this.activeMessages)
                 {
-                    m.onPointerDown(x - m.x, y - m.y);
+                    m.onPointerDown(x - m.getX(), y - m.getY());
                 }
             }
             catch (Exception e) { /* Ignore */ }
@@ -128,8 +128,8 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
                 int nx, ny;
                 for (Control c : this.activeControls)
                 {
-                    nx = x - c.x;
-                    ny = y - c.y;
+                    nx = x - c.getX();
+                    ny = y - c.getY();
                     if (c.isInNormRange(nx, ny))
                     {
                         c.onPointerDown(nx, ny);
@@ -149,7 +149,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             {
                 for (Message m : this.activeMessages)
                 {
-                    m.onPointerUp(x - m.x, y - m.y);
+                    m.onPointerUp(x - m.getX(), y - m.getY());
                 }
             }
             catch (Exception e) { /* Ignore */ }
@@ -160,7 +160,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             {
                 for (Control c : this.activeControls)
                 {
-                    c.onPointerUp(x - c.x, y - c.y);
+                    c.onPointerUp(x - c.getX(), y - c.getY());
                 }
             }
             catch (Exception e) { /* Ignore */ }
@@ -176,7 +176,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             {
                 for (Message m : this.activeMessages)
                 {
-                    m.onPointerMove(x - m.x, y - m.y);
+                    m.onPointerMove(x - m.getX(), y - m.getY());
                 }
             }
             catch (Exception e) { /* Ignore */ }
@@ -187,7 +187,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             {
                 for (Control c : this.activeControls)
                 {
-                    c.onPointerMove(x - c.x, y - c.y);
+                    c.onPointerMove(x - c.getX(), y - c.getY());
                 }
             }
             catch (Exception e) { /* Ignore */ }

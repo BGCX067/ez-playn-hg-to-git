@@ -56,7 +56,7 @@ public class Message extends Control implements ControlHolder
     {
         for (Control c : this.activeControls)
         {
-            c.onPointerDown(x - c.x, y - c.y);
+            c.onPointerDown(x - c.getX(), y - c.getY());
         }
     }
 
@@ -65,7 +65,7 @@ public class Message extends Control implements ControlHolder
     {
         for (Control c : this.activeControls)
         {
-            c.onPointerUp(x - c.x, y - c.y);
+            c.onPointerUp(x - c.getX(), y - c.getY());
         }
     }
 
@@ -74,7 +74,7 @@ public class Message extends Control implements ControlHolder
     {
         for (Control c : this.activeControls)
         {
-            c.onPointerMove(x - c.x, y - c.y);
+            c.onPointerMove(x - c.getX(), y - c.getY());
         }
     }
 
@@ -130,7 +130,7 @@ public class Message extends Control implements ControlHolder
     public void commitLayout()
     {
         this.rootLayer.setAlpha(0.75f);
-        this.rootLayer.setTranslation(this.x, this.y);
+        this.rootLayer.setTranslation(this.getX(), this.getY());
     }
 
     public final void show()
@@ -196,16 +196,16 @@ public class Message extends Control implements ControlHolder
 
             super(width, height);
 
-            CanvasLayer canvasLayer = graphics().createCanvasLayer(this.width, this.height);
+            CanvasLayer canvasLayer = graphics().createCanvasLayer(this.getWidth(), this.getHeight());
             Canvas canvas = canvasLayer.canvas();
             this.rootLayer.add(canvasLayer);
 
             canvas.setFillColor(backColor);
-            canvas.fillRect(0, 0, this.width, this.height);
+            canvas.fillRect(0, 0, this.getWidth(), this.getHeight());
             canvas.setFillColor(textColor);
-            canvas.drawText(text, 20, this.height/2);
+            canvas.drawText(text, 20, this.getHeight()/2);
 
-            canvasLayer.setTranslation(this.x, this.y);
+            canvasLayer.setTranslation(this.getX(), this.getY());
 
         }
 

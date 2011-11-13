@@ -73,8 +73,8 @@ public abstract class Button extends Control
     {
         if (this.expanding && this.enabled)
         {
-            this.rootLayer.setScale(1f, 1f);
-            this.rootLayer.setTranslation(this.x, this.y);
+            this.getRootLayer().setScale(1f, 1f);
+            this.getRootLayer().setTranslation(this.getX(), this.getY());
         }
     }
 
@@ -83,8 +83,8 @@ public abstract class Button extends Control
     {
         if (this.expanding && this.enabled)
         {
-            this.rootLayer.setScale(this.expandScale, this.expandScale);
-            this.rootLayer.setTranslation(this.x - this.expandOffsetX, this.y - this.expandOffsetY);
+            this.getRootLayer().setScale(this.expandScale, this.expandScale);
+            this.getRootLayer().setTranslation(this.getX() - this.expandOffsetX, this.getY() - this.expandOffsetY);
         }
     }
 
@@ -111,8 +111,8 @@ public abstract class Button extends Control
         this.expanding = expanding;
         if (expanding)
         {
-            this.expandOffsetX = (int)(this.width*(this.expandScale-1))/2;
-            this.expandOffsetY = (int)(this.height*(this.expandScale-1))/2;
+            this.expandOffsetX = (int)(this.getWidth()*(this.expandScale-1))/2;
+            this.expandOffsetY = (int)(this.getHeight()*(this.expandScale-1))/2;
         }
         else
         {
@@ -138,8 +138,8 @@ public abstract class Button extends Control
         {
             this.expandScale = expandScale;
             this.expanding = true;
-            this.expandOffsetX = (int)(this.width*(this.expandScale-1))/2;
-            this.expandOffsetY = (int)(this.height*(this.expandScale-1))/2;
+            this.expandOffsetX = (int)(this.getWidth()*(this.expandScale-1))/2;
+            this.expandOffsetY = (int)(this.getHeight()*(this.expandScale-1))/2;
         }
     }
 
