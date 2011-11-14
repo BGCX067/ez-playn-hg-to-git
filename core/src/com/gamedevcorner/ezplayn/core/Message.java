@@ -21,10 +21,16 @@ import java.util.*;
 
 import playn.core.*;
 
-public class Message extends Control implements ControlHolder
+/**
+ * An overlay object for displaying messages on {@link AbstractGameScreen}s
+ * @author Prageeth Silva
+ * @see AbstractControl
+ * @see ControlHolder
+ */
+public class Message extends AbstractControl implements ControlHolder
 {
 
-    private List<Control> activeControls = new ArrayList<Control>();
+    private List<AbstractControl> activeControls = new ArrayList<AbstractControl>();
 
     private boolean active = false;
 
@@ -54,7 +60,7 @@ public class Message extends Control implements ControlHolder
     @Override
     public void onPointerDown(int x, int y)
     {
-        for (Control c : this.activeControls)
+        for (AbstractControl c : this.activeControls)
         {
             c.onPointerDown(x - c.getX(), y - c.getY());
         }
@@ -63,7 +69,7 @@ public class Message extends Control implements ControlHolder
     @Override
     public void onPointerUp(int x, int y)
     {
-        for (Control c : this.activeControls)
+        for (AbstractControl c : this.activeControls)
         {
             c.onPointerUp(x - c.getX(), y - c.getY());
         }
@@ -73,7 +79,7 @@ public class Message extends Control implements ControlHolder
     public void onPointerMove(int x, int y)
     {
         int nx, ny;
-        for (Control c : this.activeControls)
+        for (AbstractControl c : this.activeControls)
         {
             nx = x - c.getX();
             ny = y - c.getY();
@@ -94,7 +100,7 @@ public class Message extends Control implements ControlHolder
     @Override
     public void onPointerScroll(int velocity)
     {
-        for (Control c : this.activeControls)
+        for (AbstractControl c : this.activeControls)
         {
             c.onPointerScroll(velocity);
         }
@@ -103,7 +109,7 @@ public class Message extends Control implements ControlHolder
     @Override
     public void onKeyDown(int keyCode)
     {
-        for (Control c : this.activeControls)
+        for (AbstractControl c : this.activeControls)
         {
             c.onKeyDown(keyCode);
         }
@@ -112,20 +118,20 @@ public class Message extends Control implements ControlHolder
     @Override
     public void onKeyUp(int keyCode)
     {
-        for (Control c : this.activeControls)
+        for (AbstractControl c : this.activeControls)
         {
             c.onKeyUp(keyCode);
         }
     }
 
     @Override
-    public Collection<Control> getChildControls()
+    public Collection<AbstractControl> getChildControls()
     {
         return this.activeControls;
     }
 
     @Override
-    public boolean addChildControl(Control control)
+    public boolean addChildControl(AbstractControl control)
     {
         if (control == null) { return false; }
         this.activeControls.add(control);
@@ -133,7 +139,7 @@ public class Message extends Control implements ControlHolder
     }
 
     @Override
-    public boolean removeChildControl(Control control)
+    public boolean removeChildControl(AbstractControl control)
     {
         if (control == null) { return false; }
         return this.activeControls.remove(control);

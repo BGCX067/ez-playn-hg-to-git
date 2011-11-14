@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * An interface that allows to hold child controls.
  * @author Prageeth Silva
- * @see Control
+ * @see AbstractControl
  */
 public interface ControlHolder
 {
@@ -29,7 +29,7 @@ public interface ControlHolder
      * Gets a collection of child controls associated with this object.
      * @return The collection of child controls.
      */
-    public Collection<Control> getChildControls();
+    public Collection<AbstractControl> getChildControls();
 
     /**
      * Add a child control to the associated control collection.
@@ -37,7 +37,7 @@ public interface ControlHolder
      * @return <code>true</code> represents succession and <code>false</code>
      *         represents failure.
      */
-    public boolean addChildControl(Control control);
+    public boolean addChildControl(AbstractControl control);
 
     /**
      * Removes an already added child control from the associated control collection.
@@ -45,6 +45,6 @@ public interface ControlHolder
      * @return <code>true</code> represents succession and <code>false</code>
      *         represents failure.
      */
-    public boolean removeChildControl(Control control);
+    public boolean removeChildControl(AbstractControl control);
 
 }
