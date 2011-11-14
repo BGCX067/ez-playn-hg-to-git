@@ -2,7 +2,7 @@
 <project name="ez-playn" default="compile"
     xmlns:artifact="urn:maven-artifact-ant">
 
-  <property name="version.num"  value="1.0"/>
+  <property name="version.num"  value="beta"/>
   <property name="src.dir"      value="src"/>
   <property name="target.dir"   value="target"/>
   <property name="lib.dir"      value="lib"/>
