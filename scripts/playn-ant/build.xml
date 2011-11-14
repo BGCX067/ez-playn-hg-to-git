@@ -142,9 +142,11 @@
 	<delete dir="${tmp.dir}"/>
 	
   </target>
-  
+ 
+<!-- 
   <target name="create-jar">
     <zip destfile="${src.jar}" basedir="playn-getting-started" />
   </target>
+-->
   
 </project>
