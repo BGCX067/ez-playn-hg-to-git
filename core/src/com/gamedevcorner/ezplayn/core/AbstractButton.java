@@ -20,10 +20,10 @@ import static playn.core.PlayN.*;
 import playn.core.*;
 
 /**
- *
- * @author Prageeth Silva *
+ * An abstract child {@link AbstractControl} that allows user to click on the button.
+ * @author Prageeth Silva
  */
-public abstract class Button extends Control
+public abstract class AbstractButton extends AbstractControl
 {
 
     protected static float ORIGINAL_SCALE = 1.0f;
@@ -41,7 +41,7 @@ public abstract class Button extends Control
     private float currentScale = ORIGINAL_SCALE;
 
 
-    public Button(int width, int height, Image activeImage, Image disabledImaged)
+    public AbstractButton(int width, int height, Image activeImage, Image disabledImaged)
     {
 
         super(width, height, activeImage);
@@ -56,7 +56,7 @@ public abstract class Button extends Control
 
     }
 
-    public Button(int width, int height)
+    public AbstractButton(int width, int height)
     {
         super(width, height, null);
         this.setAutoCentring(false);

@@ -20,21 +20,25 @@ import static playn.core.PlayN.*;
 import playn.core.*;
 import playn.core.Keyboard.Event;
 
-public abstract class ExtendedGame implements Game
+/**
+ * The main {@link Game} class with extra added features
+ * @author Prageeth Silva
+ */
+public abstract class AbstractExtendedGame implements Game
 {
 
     public static int screenWidth = 640;
     public static int screenHeight = 480;
 
-    private GameScreen<?> currentScreen = null;
-    private GameScreen<?> defaultLoadingScreen = null;
+    private AbstractGameScreen<?> currentScreen = null;
+    private AbstractGameScreen<?> defaultLoadingScreen = null;
 
     private int screensLoadCount = -1;
 
-    protected ExtendedGame(int screenWidth, int screenHieght)
+    protected AbstractExtendedGame(int screenWidth, int screenHieght)
     {
-        ExtendedGame.screenWidth = screenWidth;
-        ExtendedGame.screenHeight = screenHieght;
+        AbstractExtendedGame.screenWidth = screenWidth;
+        AbstractExtendedGame.screenHeight = screenHieght;
     }
 
     @Override
@@ -43,11 +47,11 @@ public abstract class ExtendedGame implements Game
 
         // set up the screen dimensions
 
-        graphics().setSize(ExtendedGame.screenWidth, ExtendedGame.screenHeight);
+        graphics().setSize(AbstractExtendedGame.screenWidth, AbstractExtendedGame.screenHeight);
 
         // hook the input devices
 
-        final ExtendedGame self = this;
+        final AbstractExtendedGame self = this;
 
         // pointer
         pointer().setListener(new Pointer.Adapter() {
@@ -93,7 +97,7 @@ public abstract class ExtendedGame implements Game
         // check for user defined loading screens
         if (this.defaultLoadingScreen == null)
         {
-            this.defaultLoadingScreen = new DefaultLoadingScreen(this, ExtendedGame.screenWidth, ExtendedGame.screenHeight);
+            this.defaultLoadingScreen = new DefaultLoadingScreen(this, AbstractExtendedGame.screenWidth, AbstractExtendedGame.screenHeight);
             this.defaultLoadingScreen.init(null, null);
         }
         this.setCurrentScreen(this.defaultLoadingScreen, null);
@@ -141,7 +145,7 @@ public abstract class ExtendedGame implements Game
         return 0;
     }
 
-    public abstract GameScreen<?> loadScreens();
+    public abstract AbstractGameScreen<?> loadScreens();
 
     public void onPointerDown(int x, int y)
     {
@@ -193,7 +197,7 @@ public abstract class ExtendedGame implements Game
 
     /* Getters and Setters */
 
-    public void setCurrentScreen(GameScreen<?> screen, Object obj)
+    public void setCurrentScreen(AbstractGameScreen<?> screen, Object obj)
     {
         if (screen != null)
         {
@@ -209,7 +213,7 @@ public abstract class ExtendedGame implements Game
         }
     }
 
-    protected void overrideLoadingScreen(GameScreen<?> customScreen)
+    protected void overrideLoadingScreen(AbstractGameScreen<?> customScreen)
     {
         if (customScreen != null)
         {
@@ -224,42 +228,42 @@ public abstract class ExtendedGame implements Game
 
     public int getScreenWidth()
     {
-        return ExtendedGame.screenWidth;
+        return AbstractExtendedGame.screenWidth;
     }
 
     public void setScreenWidth(int screenWidth)
     {
-        ExtendedGame.screenWidth = screenWidth;
+        AbstractExtendedGame.screenWidth = screenWidth;
     }
 
     public int getScreenHeight()
     {
-        return ExtendedGame.screenHeight;
+        return AbstractExtendedGame.screenHeight;
     }
 
     public void setScreenHeight(int screenHeight)
     {
-        ExtendedGame.screenHeight = screenHeight;
+        AbstractExtendedGame.screenHeight = screenHeight;
     }
 
-    public GameScreen<?> getDefaultLoadingScreen()
+    public AbstractGameScreen<?> getDefaultLoadingScreen()
     {
         return this.defaultLoadingScreen;
     }
 
-    public void setDefaultLoadingScreen(GameScreen<?> defaultLoadingScreen)
+    public void setDefaultLoadingScreen(AbstractGameScreen<?> defaultLoadingScreen)
     {
         this.defaultLoadingScreen = defaultLoadingScreen;
     }
 
     /* Auxiliary Classes */
 
-    private class DefaultLoadingScreen extends GameScreen<ExtendedGame>
+    private class DefaultLoadingScreen extends AbstractGameScreen<AbstractExtendedGame>
     {
 
         private CanvasLayer rootLayer = null;
 
-        protected DefaultLoadingScreen(ExtendedGame game, int width, int height)
+        protected DefaultLoadingScreen(AbstractExtendedGame game, int width, int height)
         {
             super(game, width, height);
         }

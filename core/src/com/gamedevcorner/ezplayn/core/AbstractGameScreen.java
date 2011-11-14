@@ -21,7 +21,15 @@ import java.util.*;
 
 import playn.core.*;
 
-public abstract class GameScreen<T extends ExtendedGame> implements InteractiveDrawable, ControlHolder
+/**
+ * A single game can have multiple screens that can be switched between easily.
+ * Only a single screen will be active at any given time.
+ * @author Prageeth Silva
+ * @param <T> The main game object which is a child of {@link AbstractExtendedGame}
+ * @see InteractiveDrawable
+ * @see ControlHolder
+ */
+public abstract class AbstractGameScreen<T extends AbstractExtendedGame> implements InteractiveDrawable, ControlHolder
 {
 
     protected GroupLayer rootLayer;
@@ -29,16 +37,16 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
     protected GroupLayer messageLayer;
 
     private List<Message> activeMessages = new ArrayList<Message>();
-    private List<Control> activeControls = new ArrayList<Control>();
+    private List<AbstractControl> activeControls = new ArrayList<AbstractControl>();
 
     protected T game = null;
 
-    protected GameScreen<?> previousScreen = null;
+    protected AbstractGameScreen<?> previousScreen = null;
 
     protected int width = 0;
     protected int height = 0;
 
-    protected GameScreen(T game, int width, int height)
+    protected AbstractGameScreen(T game, int width, int height)
     {
 
         this.game = game;
@@ -71,7 +79,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         {
             try
             {
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     c.update(delta);
                 }
@@ -98,7 +106,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         {
             try
             {
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     c.paint(alpha);
                 }
@@ -126,7 +134,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             try
             {
                 int nx, ny;
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     nx = x - c.getX();
                     ny = y - c.getY();
@@ -158,7 +166,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         {
             try
             {
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     c.onPointerUp(x - c.getX(), y - c.getY());
                 }
@@ -186,7 +194,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
             try
             {
                 int nx, ny;
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     nx = x - c.getX();
                     ny = y - c.getY();
@@ -222,7 +230,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         {
             try
             {
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     c.onPointerScroll(velocity);
                 }
@@ -249,7 +257,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         {
             try
             {
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     c.onKeyDown(keyCode);
                 }
@@ -276,7 +284,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         {
             try
             {
-                for (Control c : this.activeControls)
+                for (AbstractControl c : this.activeControls)
                 {
                     c.onKeyUp(keyCode);
                 }
@@ -328,7 +336,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
         return game;
     }
 
-    public GameScreen<?> getPreviousScreen()
+    public AbstractGameScreen<?> getPreviousScreen()
     {
         return this.previousScreen;
     }
@@ -339,13 +347,13 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
     }
 
     @Override
-    public Collection<Control> getChildControls()
+    public Collection<AbstractControl> getChildControls()
     {
         return this.activeControls;
     }
 
     @Override
-    public boolean addChildControl(Control control)
+    public boolean addChildControl(AbstractControl control)
     {
         if (control == null) { return false; }
         this.activeControls.add(control);
@@ -354,7 +362,7 @@ public abstract class GameScreen<T extends ExtendedGame> implements InteractiveD
     }
 
     @Override
-    public boolean removeChildControl(Control control)
+    public boolean removeChildControl(AbstractControl control)
     {
         if (control == null) { return false; }
         return this.activeControls.remove(control);

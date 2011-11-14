@@ -26,7 +26,7 @@ import playn.core.*;
  * @see InteractiveDrawable
  * @see Drawable
  */
-public abstract class Control implements InteractiveDrawable
+public abstract class AbstractControl implements InteractiveDrawable
 {
 
     private int width = 0;
@@ -49,7 +49,7 @@ public abstract class Control implements InteractiveDrawable
      * @param backgroundImage An image to be used as the background,
      *        use <code>null</code> to leave the background empty.
      */
-    protected Control(int width, int height, Image backgroundImage)
+    protected AbstractControl(int width, int height, Image backgroundImage)
     {
         this.setWidth(width);
         this.setHeight(height);
@@ -68,7 +68,7 @@ public abstract class Control implements InteractiveDrawable
      * @param width The width of the control
      * @param height The height of the control
      */
-    protected Control(int width, int height)
+    protected AbstractControl(int width, int height)
     {
         this(width, height, null);
     }
@@ -104,7 +104,7 @@ public abstract class Control implements InteractiveDrawable
 
         if (this.autoCentring)
         {
-            this.x = (ExtendedGame.screenWidth-width)/2;
+            this.x = (AbstractExtendedGame.screenWidth-width)/2;
         }
 
     }
@@ -120,7 +120,7 @@ public abstract class Control implements InteractiveDrawable
 
         if (autoCentring)
         {
-            this.y = (ExtendedGame.screenHeight-height)/2;
+            this.y = (AbstractExtendedGame.screenHeight-height)/2;
         }
 
     }
@@ -163,8 +163,8 @@ public abstract class Control implements InteractiveDrawable
         this.autoCentring = autoCentring;
         if (autoCentring)
         {
-            this.x = (ExtendedGame.screenHeight-this.width)/2;
-            this.y = (ExtendedGame.screenHeight-this.height)/2;
+            this.x = (AbstractExtendedGame.screenHeight-this.width)/2;
+            this.y = (AbstractExtendedGame.screenHeight-this.height)/2;
         }
     }
 
@@ -172,7 +172,7 @@ public abstract class Control implements InteractiveDrawable
      * Checks if the given coordinates are within the range of the control.
      * This method assumes the coordinates are already normalised by the parent
      * {@link ControlHolder}. If absolute coordinates are to be check, use
-     * {@link Control#isInAbsRange(int, int)}
+     * {@link AbstractControl#isInAbsRange(int, int)}
      * @param x The x-coordinate from the left of the parent {@link ControlHolder}
      * @param y The y-coordinate from the top of the parent {@link ControlHolder}
      * @return Whether the coordinates are in range.
@@ -186,7 +186,7 @@ public abstract class Control implements InteractiveDrawable
      * Checks if the given coordinates are within the range of the control.
      * This method assumes the coordinates are absolute screen coordinates.
      * If normalised coordinates are to be check, use
-     * {@link Control#isInNormRange(int, int)}
+     * {@link AbstractControl#isInNormRange(int, int)}
      * @param x The x-coordinate from the left of the screen
      * @param y The y-coordinate from the top of the screen
      * @return Whether the coordinates are in range.
